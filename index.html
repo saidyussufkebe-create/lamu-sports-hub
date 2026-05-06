@@ -13,7 +13,7 @@
         h1, h2, h3, .font-space { font-family: 'Space Grotesk', sans-serif; }
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
         .bottom-nav { background: rgba(11, 27, 45, 0.95); backdrop-filter: blur(15px); border-top: 1px solid rgba(255,255,255,0.1); padding-bottom: env(safe-area-inset-bottom); }
-        .nav-tab.active { color: var(--coral); }
+        .nav-tab.active { color: var(--coral) !important; }
         .fab-center { background: linear-gradient(135deg, var(--coral), #FF8E53); box-shadow: 0 4px 15px rgba(255, 107, 74, 0.4); transform: translateY(-18px); }
         .hide-scroll::-webkit-scrollbar { display: none; }
         .match-live { animation: pulse 2s infinite; }
@@ -38,17 +38,9 @@
                 </button>
             </div>
         </div>
-        <div class="border-t border-white/5 bg-white/5 hide-scroll overflow-x-auto whitespace-nowrap">
-            <div class="flex px-4 py-2 space-x-6 text-[10px] font-bold uppercase tracking-widest text-gray-400">
-                <button onclick="showSection('dashboard')" class="text-orange-400 border-b border-orange-400">Live/Scores</button>
-                <button onclick="showSection('feed')">News/Updates</button>
-                <button onclick="showSection('feed')">Fixtures</button>
-                <button onclick="showSection('profile')">Standings</button>
-            </div>
-        </div>
     </nav>
 
-    <main class="pt-28 pb-24 px-4 max-w-xl mx-auto">
+    <main class="pt-20 pb-24 px-4 max-w-xl mx-auto">
         
         <section id="dashboard" class="space-y-6">
             <div class="glass rounded-3xl p-6 border-l-4 border-orange-500">
@@ -57,25 +49,25 @@
                     <span class="text-gray-500 text-[10px]">78'</span>
                 </div>
                 <div class="flex items-center justify-between text-center">
-                    <div class="w-1/3">
+                    <div class="w-1/3 text-center">
                         <i class="fas fa-shield-alt text-2xl text-blue-400 mb-2"></i>
-                        <p class="text-xs font-bold uppercase">11 Brothers</p>
+                        <p class="text-[10px] font-bold uppercase">11 Brothers</p>
                     </div>
                     <div class="w-1/3 text-3xl font-black text-orange-500">2 - 1</div>
-                    <div class="w-1/3">
+                    <div class="w-1/3 text-center">
                         <i class="fas fa-anchor text-2xl text-teal-400 mb-2"></i>
-                        <p class="text-xs font-bold uppercase">Blue Rangers</p>
+                        <p class="text-[10px] font-bold uppercase">Blue Rangers</p>
                     </div>
                 </div>
             </div>
             
             <div class="grid grid-cols-2 gap-4">
                 <div class="glass p-4 rounded-2xl">
-                    <p class="text-gray-500 text-[10px] font-bold uppercase mb-1">Teams</p>
+                    <p class="text-gray-500 text-[10px] font-bold uppercase mb-1">Total Teams</p>
                     <h3 class="text-2xl font-bold">20</h3>
                 </div>
                 <div class="glass p-4 rounded-2xl">
-                    <p class="text-gray-500 text-[10px] font-bold uppercase mb-1">Players</p>
+                    <p class="text-gray-500 text-[10px] font-bold uppercase mb-1">Registered Players</p>
                     <h3 class="text-2xl font-bold">384</h3>
                 </div>
             </div>
@@ -83,12 +75,14 @@
 
         <section id="feed" class="hidden space-y-6">
             <div class="glass rounded-3xl p-5 bg-gradient-to-br from-teal-500/20 to-transparent border-teal-500/30">
-                <p class="text-teal-400 text-[9px] font-black uppercase tracking-widest mb-1">Player of the Week</p>
+                <p class="text-teal-400 text-[9px] font-black uppercase tracking-widest mb-2">Player of the Week</p>
                 <div class="flex items-center space-x-4">
-                    <div class="w-14 h-14 bg-gray-800 rounded-xl border border-teal-500/50"></div>
+                    <div class="w-14 h-14 bg-gray-800 rounded-xl border border-teal-500/50 flex items-center justify-center">
+                        <i class="fas fa-user-tie text-teal-500/30 text-xl"></i>
+                    </div>
                     <div>
                         <h4 class="font-bold">Omar Fadhil</h4>
-                        <p class="text-xs text-gray-400">Manda City • <span class="text-orange-500">8 Goals</span></p>
+                        <p class="text-xs text-gray-400">Manda City • <span class="text-orange-500 font-bold">8 Goals</span></p>
                     </div>
                 </div>
             </div>
@@ -97,12 +91,42 @@
                 <h4 class="text-xs font-bold uppercase mb-4 text-orange-400">Match Schedule: May 2026</h4>
                 <div class="space-y-3 text-[11px]">
                     <div class="flex justify-between border-b border-white/5 pb-2">
-                        <span>May 10</span><span class="font-bold">Lawesco vs Crocodile Jnr</span><span class="text-teal-400">4:30PM</span>
+                        <span>May 10</span><span class="font-bold">Lawesco vs Crocodile Jnr</span><span class="text-teal-400">4:30 PM</span>
                     </div>
                     <div class="flex justify-between border-b border-white/5 pb-2">
-                        <span>May 11</span><span class="font-bold">All Brothers vs Boda Nation</span><span class="text-teal-400">4:30PM</span>
+                        <span>May 11</span><span class="font-bold">All Brothers vs Boda Nation</span><span class="text-teal-400">4:30 PM</span>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section id="facilities" class="hidden space-y-4">
+            <h2 class="text-lg font-bold uppercase text-teal-400 mb-4">Lamu County Pitches</h2>
+            <div class="glass p-4 rounded-2xl flex justify-between items-center">
+                <div><h4 class="font-bold">Twaif Ground</h4><p class="text-[10px] text-gray-500">Natural Grass • Cap: 500</p></div>
+                <i class="fas fa-map-marker-alt text-teal-500"></i>
+            </div>
+            <div class="glass p-4 rounded-2xl flex justify-between items-center">
+                <div><h4 class="font-bold">Carpet Field</h4><p class="text-[10px] text-gray-500">Artificial Turf • Cap: 200</p></div>
+                <i class="fas fa-layer-group text-teal-500"></i>
+            </div>
+        </section>
+
+        <section id="registration" class="hidden space-y-6">
+            <h2 class="text-xl font-bold text-red-500 uppercase">New Player Form</h2>
+            <div class="glass rounded-3xl p-6 space-y-4">
+                <div class="flex flex-col items-center border-b border-white/5 pb-4 mb-4">
+                    <div class="w-20 h-20 bg-white/5 rounded-full border-2 border-dashed border-red-500 flex items-center justify-center mb-2">
+                        <i class="fas fa-camera text-red-500"></i>
+                    </div>
+                    <p class="text-[9px] text-red-500 font-bold uppercase">Image exceeds 500KB limit</p>
+                </div>
+                <input type="text" value="Kebe" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-sm focus:outline-none focus:border-red-500">
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="text" value="Forward" class="bg-white/5 border border-white/10 rounded-xl p-3 text-sm">
+                    <input type="text" value="05" class="bg-white/5 border border-white/10 rounded-xl p-3 text-sm font-mono">
+                </div>
+                <button class="w-full py-4 bg-red-600 rounded-2xl font-bold uppercase tracking-widest shadow-xl">Add Player</button>
             </div>
         </section>
 
@@ -116,47 +140,22 @@
                 </div>
             </div>
 
-            <div class="space-y-4">
-                <div class="glass rounded-2xl p-5 border-l-4 border-red-600">
-                    <h4 class="text-xs font-bold text-red-500 uppercase mb-3">Official Access</h4>
-                    <div class="flex gap-2">
-                        <input type="password" id="adminCode" placeholder="Enter Access Code" class="flex-1 bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-xs">
-                        <button onclick="verifyAdmin()" class="bg-red-600 px-4 rounded-xl text-xs font-bold uppercase">Unlock</button>
-                    </div>
+            <div class="glass rounded-2xl p-5 border-l-4 border-red-600">
+                <h4 class="text-xs font-bold text-red-500 uppercase mb-3">Official Access</h4>
+                <div class="flex gap-2">
+                    <input type="password" id="adminCode" placeholder="Access Code" class="flex-1 bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-xs focus:outline-none">
+                    <button onclick="verifyAdmin()" class="bg-red-600 px-6 rounded-xl text-xs font-bold uppercase">Verify</button>
                 </div>
-
-                <div class="grid grid-cols-2 gap-3">
-                    <button class="glass p-4 rounded-2xl flex flex-col items-center gap-2"><i class="fas fa-headset text-blue-400"></i><span class="text-[10px] font-bold">Support</span></button>
-                    <button onclick="showSection('registration')" class="glass p-4 rounded-2xl flex flex-col items-center gap-2"><i class="fas fa-user-plus text-red-400"></i><span class="text-[10px] font-bold uppercase">Register Player</span></button>
-                </div>
-            </div>
-        </section>
-
-        <section id="registration" class="hidden space-y-6">
-            <h2 class="text-xl font-bold text-red-500 uppercase">New Player Form</h2>
-            <div class="glass rounded-3xl p-6 space-y-4">
-                <div class="flex flex-col items-center border-b border-white/5 pb-4 mb-4">
-                    <div class="w-20 h-20 bg-white/5 rounded-full border-2 border-dashed border-red-500 flex items-center justify-center mb-2">
-                        <i class="fas fa-camera text-red-500"></i>
-                    </div>
-                    <p class="text-[9px] text-red-500 font-bold uppercase">Image exceeds 500KB limit</p>
-                </div>
-                <input type="text" value="Kebe" placeholder="Player Name" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-sm">
-                <select class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-sm text-gray-500"><option>Select team...</option></select>
-                <div class="grid grid-cols-2 gap-4">
-                    <input type="text" value="Forward" class="bg-white/5 border border-white/10 rounded-xl p-3 text-sm">
-                    <input type="text" value="05" class="bg-white/5 border border-white/10 rounded-xl p-3 text-sm font-mono">
-                </div>
-                <button class="w-full py-4 bg-red-600 rounded-2xl font-bold uppercase tracking-widest shadow-xl">Add Player</button>
             </div>
         </section>
 
         <section id="admin-panel" class="hidden space-y-6">
-            <h2 class="text-xl font-bold text-blue-500 uppercase">Command Center</h2>
-            <div class="grid grid-cols-2 gap-3">
+            <div class="flex justify-between items-center">
+                <h2 class="text-xl font-bold text-blue-500 uppercase">Command Center</h2>
+                <button onclick="showSection('profile')" class="text-xs text-gray-500 underline">Logout</button>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
                 <div class="glass p-5 rounded-2xl flex flex-col items-center"><i class="fas fa-users text-blue-400 mb-2"></i><span class="text-[10px] font-bold">Manage Users</span></div>
-                <div class="glass p-5 rounded-2xl flex flex-col items-center"><i class="fas fa-map-marked-alt text-green-400 mb-2"></i><span class="text-[10px] font-bold">Manage Pitches</span></div>
-                <div class="glass p-5 rounded-2xl flex flex-col items-center"><i class="fas fa-inbox text-yellow-400 mb-2"></i><span class="text-[10px] font-bold">Suggestions</span></div>
                 <div class="glass p-5 rounded-2xl flex flex-col items-center"><i class="fas fa-shield-alt text-red-400 mb-2"></i><span class="text-[10px] font-bold">Team Control</span></div>
             </div>
         </section>
@@ -165,35 +164,64 @@
 
     <div class="fixed bottom-0 w-full z-50 bottom-nav">
         <div class="max-w-md mx-auto flex justify-around items-end px-4 py-2">
-            <button onclick="showSection('dashboard')" class="nav-tab active flex flex-col items-center w-16">
-                <i class="fas fa-home text-xl mb-1"></i><span class="text-[9px] font-bold uppercase">Home</span>
+            
+            <button onclick="showSection('dashboard')" class="nav-tab active flex flex-col items-center w-16 text-orange-400">
+                <i class="fas fa-home text-xl mb-1"></i>
+                <span class="text-[9px] font-bold uppercase">Home</span>
             </button>
-            <button onclick="showSection('feed')" class="nav-tab flex flex-col items-center w-16">
-                <i class="fas fa-stream text-xl mb-1"></i><span class="text-[9px] font-bold uppercase">Feed</span>
+
+            <button onclick="showSection('feed')" class="nav-tab flex flex-col items-center w-16 text-gray-500">
+                <i class="fas fa-stream text-xl mb-1"></i>
+                <span class="text-[9px] font-bold uppercase">Feed</span>
             </button>
+
             <div class="flex flex-col items-center">
                 <button onclick="showSection('registration')" class="fab-center w-14 h-14 rounded-full flex items-center justify-center text-white text-xl border-4 border-[#0B1B2D]">
                     <i class="fas fa-plus"></i>
                 </button>
-                <span class="text-[9px] font-bold uppercase mt-[-10px] text-orange-400">Action</span>
+                <span class="text-[9px] font-bold uppercase mt-[-10px] text-gray-500">Action</span>
             </div>
-            <button onclick="showSection('dashboard')" class="nav-tab flex flex-col items-center w-16">
-                <i class="fas fa-map-pin text-xl mb-1"></i><span class="text-[9px] font-bold uppercase">Pitches</span>
+
+            <button onclick="showSection('facilities')" class="nav-tab flex flex-col items-center w-16 text-gray-500">
+                <i class="fas fa-map-pin text-xl mb-1"></i>
+                <span class="text-[9px] font-bold uppercase">Pitches</span>
             </button>
-            <button onclick="showSection('profile')" class="nav-tab flex flex-col items-center w-16">
-                <i class="fas fa-bars text-xl mb-1"></i><span class="text-[9px] font-bold uppercase">More</span>
+
+            <button onclick="showSection('profile')" class="nav-tab flex flex-col items-center w-16 text-gray-500">
+                <i class="fas fa-bars text-xl mb-1"></i>
+                <span class="text-[9px] font-bold uppercase">More</span>
             </button>
         </div>
     </div>
 
     <script>
-        function showSection(id) {
-            const sections = ['dashboard', 'feed', 'profile', 'registration', 'admin-panel'];
-            sections.forEach(s => document.getElementById(s).classList.add('hidden'));
-            document.getElementById(id).classList.remove('hidden');
+        function showSection(sectionId) {
+            // 1. All sections list
+            const sections = ['dashboard', 'feed', 'profile', 'registration', 'facilities', 'admin-panel'];
             
-            // Update Tab Highlights
-            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active', 'text-orange-400'));
+            // 2. Hide all
+            sections.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+
+            // 3. Show target
+            const target = document.getElementById(sectionId);
+            if (target) target.classList.remove('hidden');
+
+            // 4. Update Tab UI
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('text-orange-400');
+                tab.classList.add('text-gray-500');
+                
+                // Match current section to tab onclick attribute
+                const clickAttr = tab.getAttribute('onclick');
+                if (clickAttr && clickAttr.includes(sectionId)) {
+                    tab.classList.add('text-orange-400');
+                    tab.classList.remove('text-gray-500');
+                }
+            });
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -202,10 +230,16 @@
             if (code === "2540") {
                 showSection('admin-panel');
             } else {
-                alert("Incorrect Access Code");
+                alert("Access Denied: Invalid Official Code");
             }
         }
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('dashboard');
+        });
     </script>
 </body>
-  </html>
-                                                                                                                                   
+                            </html>
+                    
+                                                     
