@@ -1,245 +1,377 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-[#020617] text-white">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Lamu Sports Hub | Pwani Football</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lamu Sports Hub | The Home of Lamu Football</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        :root { --ocean: #0B1B2D; --coral: #FF6B4A; --teal: #2A9D8F; --gold: #E9C46A; }
-        body { font-family: 'Inter', sans-serif; background: var(--ocean); color: #fff; scroll-behavior: smooth; }
-        h1, h2, h3, .font-space { font-family: 'Space Grotesk', sans-serif; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .bottom-nav { background: rgba(11, 27, 45, 0.95); backdrop-filter: blur(15px); border-top: 1px solid rgba(255,255,255,0.1); padding-bottom: env(safe-area-inset-bottom); }
-        .nav-tab.active { color: var(--coral) !important; }
-        .fab-center { background: linear-gradient(135deg, var(--coral), #FF8E53); box-shadow: 0 4px 15px rgba(255, 107, 74, 0.4); transform: translateY(-18px); }
+        :root {
+            --lsh-orange: #FF6B00;
+            --lsh-bg: #020617;
+            --lsh-teal: #14b8a6;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--lsh-bg);
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Logic */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Ambient Background Orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .orb-1 { width: 400px; height: 400px; background: var(--lsh-orange); top: -100px; right: -100px; animation: float 25s infinite alternate; }
+        .orb-2 { width: 300px; height: 300px; background: #1e3a8a; bottom: 50px; left: -100px; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-80px, 120px); }
+        }
+
+        /* Navigation Active States */
+        .nav-active { color: var(--lsh-orange) !important; transform: translateY(-4px); }
+
+        /* Animation Classes */
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pulse-live { animation: pulse-red 2s infinite; }
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        /* Custom Scrollbars */
         .hide-scroll::-webkit-scrollbar { display: none; }
-        .match-live { animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+
+        /* Countdown Pill */
+        .countdown-pill {
+            background: rgba(20, 184, 166, 0.1);
+            border: 1px solid rgba(20, 184, 166, 0.2);
+            color: var(--lsh-teal);
+            padding: 4px 10px;
+            border-radius: 99px;
+            font-size: 8px;
+            font-weight: 900;
+        }
     </style>
 </head>
-<body class="min-h-screen">
+<body class="pb-32 px-4 pt-4">
 
-    <nav class="fixed top-0 w-full z-50 glass border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-yellow-400 flex items-center justify-center">
-                    <i class="fas fa-futbol text-white text-sm"></i>
-                </div>
-                <span class="font-bold text-lg tracking-tighter uppercase">Lamu Sports Hub</span>
-            </div>
-            <div class="flex items-center space-x-2">
-                <button class="p-2 text-gray-400"><i class="fas fa-search"></i></button>
-                <button class="relative p-2 text-gray-400">
-                    <i class="fas fa-bell"></i>
-                    <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full match-live"></span>
-                </button>
-            </div>
-        </div>
-    </nav>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
 
-    <main class="pt-20 pb-24 px-4 max-w-xl mx-auto">
-        
-        <section id="dashboard" class="space-y-6">
-            <div class="glass rounded-3xl p-6 border-l-4 border-orange-500">
-                <div class="flex items-center justify-between mb-4">
-                    <span class="text-red-500 font-black text-[10px] tracking-widest match-live">● LIVE NOW</span>
-                    <span class="text-gray-500 text-[10px]">78'</span>
-                </div>
-                <div class="flex items-center justify-between text-center">
-                    <div class="w-1/3 text-center">
-                        <i class="fas fa-shield-alt text-2xl text-blue-400 mb-2"></i>
-                        <p class="text-[10px] font-bold uppercase">11 Brothers</p>
-                    </div>
-                    <div class="w-1/3 text-3xl font-black text-orange-500">2 - 1</div>
-                    <div class="w-1/3 text-center">
-                        <i class="fas fa-anchor text-2xl text-teal-400 mb-2"></i>
-                        <p class="text-[10px] font-bold uppercase">Blue Rangers</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4">
-                <div class="glass p-4 rounded-2xl">
-                    <p class="text-gray-500 text-[10px] font-bold uppercase mb-1">Total Teams</p>
-                    <h3 class="text-2xl font-bold">20</h3>
-                </div>
-                <div class="glass p-4 rounded-2xl">
-                    <p class="text-gray-500 text-[10px] font-bold uppercase mb-1">Registered Players</p>
-                    <h3 class="text-2xl font-bold">384</h3>
-                </div>
-            </div>
-        </section>
-
-        <section id="feed" class="hidden space-y-6">
-            <div class="glass rounded-3xl p-5 bg-gradient-to-br from-teal-500/20 to-transparent border-teal-500/30">
-                <p class="text-teal-400 text-[9px] font-black uppercase tracking-widest mb-2">Player of the Week</p>
+    <div id="goalAlert" class="fixed top-6 left-1/2 -translate-x-1/2 z-[1000] w-[90%] max-w-sm hidden fade-in">
+        <div class="bg-gradient-to-r from-orange-600 to-red-600 rounded-3xl p-1 shadow-2xl">
+            <div class="bg-[#0B1B2D] rounded-[1.4rem] p-4 flex items-center justify-between">
                 <div class="flex items-center space-x-4">
-                    <div class="w-14 h-14 bg-gray-800 rounded-xl border border-teal-500/50 flex items-center justify-center">
-                        <i class="fas fa-user-tie text-teal-500/30 text-xl"></i>
-                    </div>
+                    <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center animate-pulse"><i class="fas fa-futbol"></i></div>
                     <div>
-                        <h4 class="font-bold">Omar Fadhil</h4>
-                        <p class="text-xs text-gray-400">Manda City • <span class="text-orange-500 font-bold">8 Goals</span></p>
+                        <p class="text-[8px] font-black uppercase text-orange-500 tracking-widest">GOALLLLL!</p>
+                        <p id="alert-scorer" class="text-sm font-black uppercase">Juma Hassan</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="glass rounded-2xl p-4">
-                <h4 class="text-xs font-bold uppercase mb-4 text-orange-400">Match Schedule: May 2026</h4>
-                <div class="space-y-3 text-[11px]">
-                    <div class="flex justify-between border-b border-white/5 pb-2">
-                        <span>May 10</span><span class="font-bold">Lawesco vs Crocodile Jnr</span><span class="text-teal-400">4:30 PM</span>
-                    </div>
-                    <div class="flex justify-between border-b border-white/5 pb-2">
-                        <span>May 11</span><span class="font-bold">All Brothers vs Boda Nation</span><span class="text-teal-400">4:30 PM</span>
-                    </div>
+                <div class="text-right">
+                    <p id="alert-team" class="text-[8px] font-bold text-gray-500 uppercase">Benfica FK</p>
+                    <p id="alert-score" class="text-lg font-black">2 - 1</p>
                 </div>
             </div>
-        </section>
-
-        <section id="facilities" class="hidden space-y-4">
-            <h2 class="text-lg font-bold uppercase text-teal-400 mb-4">Lamu County Pitches</h2>
-            <div class="glass p-4 rounded-2xl flex justify-between items-center">
-                <div><h4 class="font-bold">Twaif Ground</h4><p class="text-[10px] text-gray-500">Natural Grass • Cap: 500</p></div>
-                <i class="fas fa-map-marker-alt text-teal-500"></i>
-            </div>
-            <div class="glass p-4 rounded-2xl flex justify-between items-center">
-                <div><h4 class="font-bold">Carpet Field</h4><p class="text-[10px] text-gray-500">Artificial Turf • Cap: 200</p></div>
-                <i class="fas fa-layer-group text-teal-500"></i>
-            </div>
-        </section>
-
-        <section id="registration" class="hidden space-y-6">
-            <h2 class="text-xl font-bold text-red-500 uppercase">New Player Form</h2>
-            <div class="glass rounded-3xl p-6 space-y-4">
-                <div class="flex flex-col items-center border-b border-white/5 pb-4 mb-4">
-                    <div class="w-20 h-20 bg-white/5 rounded-full border-2 border-dashed border-red-500 flex items-center justify-center mb-2">
-                        <i class="fas fa-camera text-red-500"></i>
-                    </div>
-                    <p class="text-[9px] text-red-500 font-bold uppercase">Image exceeds 500KB limit</p>
-                </div>
-                <input type="text" value="Kebe" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-sm focus:outline-none focus:border-red-500">
-                <div class="grid grid-cols-2 gap-4">
-                    <input type="text" value="Forward" class="bg-white/5 border border-white/10 rounded-xl p-3 text-sm">
-                    <input type="text" value="05" class="bg-white/5 border border-white/10 rounded-xl p-3 text-sm font-mono">
-                </div>
-                <button class="w-full py-4 bg-red-600 rounded-2xl font-bold uppercase tracking-widest shadow-xl">Add Player</button>
-            </div>
-        </section>
-
-        <section id="profile" class="hidden space-y-6">
-            <div class="glass rounded-3xl p-6 text-center">
-                <div class="w-20 h-20 bg-gradient-to-br from-gray-700 to-black rounded-2xl mx-auto mb-3 flex items-center justify-center text-3xl font-bold">G</div>
-                <h3 class="font-bold text-xl">Go</h3>
-                <p class="text-orange-500 text-[10px] font-bold uppercase mb-4">Island Pride • Mkomani • Fan</p>
-                <div class="py-2 px-4 bg-teal-500/10 rounded-full border border-teal-500/20 inline-flex items-center text-[9px] font-bold text-teal-400">
-                    <i class="fas fa-shield-check mr-2"></i> HOSTED ON ICP BLOCKCHAIN
-                </div>
-            </div>
-
-            <div class="glass rounded-2xl p-5 border-l-4 border-red-600">
-                <h4 class="text-xs font-bold text-red-500 uppercase mb-3">Official Access</h4>
-                <div class="flex gap-2">
-                    <input type="password" id="adminCode" placeholder="Access Code" class="flex-1 bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-xs focus:outline-none">
-                    <button onclick="verifyAdmin()" class="bg-red-600 px-6 rounded-xl text-xs font-bold uppercase">Verify</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="admin-panel" class="hidden space-y-6">
-            <div class="flex justify-between items-center">
-                <h2 class="text-xl font-bold text-blue-500 uppercase">Command Center</h2>
-                <button onclick="showSection('profile')" class="text-xs text-gray-500 underline">Logout</button>
-            </div>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="glass p-5 rounded-2xl flex flex-col items-center"><i class="fas fa-users text-blue-400 mb-2"></i><span class="text-[10px] font-bold">Manage Users</span></div>
-                <div class="glass p-5 rounded-2xl flex flex-col items-center"><i class="fas fa-shield-alt text-red-400 mb-2"></i><span class="text-[10px] font-bold">Team Control</span></div>
-            </div>
-        </section>
-
-    </main>
-
-    <div class="fixed bottom-0 w-full z-50 bottom-nav">
-        <div class="max-w-md mx-auto flex justify-around items-end px-4 py-2">
-            
-            <button onclick="showSection('dashboard')" class="nav-tab active flex flex-col items-center w-16 text-orange-400">
-                <i class="fas fa-home text-xl mb-1"></i>
-                <span class="text-[9px] font-bold uppercase">Home</span>
-            </button>
-
-            <button onclick="showSection('feed')" class="nav-tab flex flex-col items-center w-16 text-gray-500">
-                <i class="fas fa-stream text-xl mb-1"></i>
-                <span class="text-[9px] font-bold uppercase">Feed</span>
-            </button>
-
-            <div class="flex flex-col items-center">
-                <button onclick="showSection('registration')" class="fab-center w-14 h-14 rounded-full flex items-center justify-center text-white text-xl border-4 border-[#0B1B2D]">
-                    <i class="fas fa-plus"></i>
-                </button>
-                <span class="text-[9px] font-bold uppercase mt-[-10px] text-gray-500">Action</span>
-            </div>
-
-            <button onclick="showSection('facilities')" class="nav-tab flex flex-col items-center w-16 text-gray-500">
-                <i class="fas fa-map-pin text-xl mb-1"></i>
-                <span class="text-[9px] font-bold uppercase">Pitches</span>
-            </button>
-
-            <button onclick="showSection('profile')" class="nav-tab flex flex-col items-center w-16 text-gray-500">
-                <i class="fas fa-bars text-xl mb-1"></i>
-                <span class="text-[9px] font-bold uppercase">More</span>
-            </button>
         </div>
     </div>
 
-    <script>
-        function showSection(sectionId) {
-            // 1. All sections list
-            const sections = ['dashboard', 'feed', 'profile', 'registration', 'facilities', 'admin-panel'];
+    <main id="app-viewport">
+        <section id="tab-home" class="tab-content space-y-8 fade-in">
+            <header class="flex flex-col items-center py-4">
+                <div class="relative mb-4">
+                    <div class="absolute inset-[-6px] rounded-full border-2 border-dashed border-orange-500/30 animate-[spin_15s_linear_infinite]"></div>
+                    <div class="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center border border-white/10 text-2xl font-black italic"><span class="text-orange-500">L</span>SH</div>
+                </div>
+                <h1 class="text-xl font-black uppercase tracking-tighter">Lamu Sports Hub</h1>
+                <p class="text-[8px] font-bold text-orange-500 uppercase tracking-[0.3em]">The Home of Lamu Football</p>
+            </header>
+
+            <div class="glass rounded-[2.5rem] p-6 border-l-4 border-red-500">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-[9px] font-black uppercase text-red-500 tracking-widest flex items-center">
+                        <span class="w-1.5 h-1.5 bg-red-500 rounded-full mr-2 animate-ping"></span> Live Match
+                    </span>
+                    <span class="text-[8px] font-bold text-gray-500 uppercase">Sports Ground • 74'</span>
+                </div>
+                <div class="flex justify-between items-center text-center">
+                    <div class="w-1/3">
+                        <div class="w-12 h-12 glass rounded-2xl mx-auto mb-2 flex items-center justify-center font-black">BEN</div>
+                        <p class="text-[10px] font-black uppercase">Benfica</p>
+                    </div>
+                    <div class="w-1/3">
+                        <h2 class="text-3xl font-black">2 - 1</h2>
+                        <p class="text-[7px] font-bold text-teal-400 mt-2 uppercase">J. Hassan 62' ⚽</p>
+                    </div>
+                    <div class="w-1/3">
+                        <div class="w-12 h-12 glass rounded-2xl mx-auto mb-2 flex items-center justify-center font-black">AMU</div>
+                        <p class="text-[10px] font-black uppercase">Amu Stars</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div class="glass p-5 rounded-[2rem] space-y-2">
+                    <p class="text-[8px] font-black uppercase text-gray-500">Fan Streak</p>
+                    <p class="text-lg font-black">7 DAYS 🔥</p>
+                </div>
+                <div class="glass p-5 rounded-[2rem] space-y-2">
+                    <p class="text-[8px] font-black uppercase text-gray-500">Your Rank</p>
+                    <p class="text-lg font-black">#12 🏆</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-matches" class="tab-content hidden space-y-6 fade-in">
+            <h2 class="text-2xl font-black uppercase tracking-tighter px-1">Fixtures</h2>
             
-            // 2. Hide all
-            sections.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.classList.add('hidden');
-            });
+            <div class="space-y-4">
+                <div class="glass p-6 rounded-[2rem] space-y-4 border border-white/5">
+                    <div class="flex justify-between items-center">
+                        <span class="text-[8px] font-black uppercase text-gray-500">MAY 10 • 16:30</span>
+                        <div class="countdown-pill" id="match-countdown">2d 4h 12m</div>
+                    </div>
+                    <div class="flex justify-between items-center px-4">
+                        <span class="text-xs font-black uppercase">All Brothers</span>
+                        <span class="text-[10px] font-black text-gray-700 italic">VS</span>
+                        <span class="text-xs font-black uppercase text-right">Kashmir City</span>
+                    </div>
+                    <button onclick="triggerPrediction()" class="w-full py-3 bg-teal-500/10 border border-teal-500/20 rounded-xl text-[9px] font-black uppercase text-teal-400">Predict Score & Win XP</button>
+                </div>
+            </div>
+        </section>
 
-            // 3. Show target
-            const target = document.getElementById(sectionId);
-            if (target) target.classList.remove('hidden');
+        <section id="tab-table" class="tab-content hidden space-y-6 fade-in">
+            <h2 class="text-2xl font-black uppercase tracking-tighter px-1">Standings</h2>
+            <div class="glass rounded-[2rem] overflow-hidden">
+                <div class="overflow-x-auto hide-scroll">
+                    <table class="w-full text-left min-w-[500px]">
+                        <thead class="bg-white/5 text-[8px] font-black uppercase text-gray-500">
+                            <tr>
+                                <th class="p-4 w-12 text-center">Pos</th>
+                                <th class="p-4">Club</th>
+                                <th class="p-4 text-center">P</th>
+                                <th class="p-4 text-center">GD</th>
+                                <th class="p-4 text-center bg-white/5">Pts</th>
+                                <th class="p-4 text-center">Form</th>
+                            </tr>
+                        </thead>
+                        <tbody id="league-data" class="text-[10px] font-bold divide-y divide-white/5">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
 
-            // 4. Update Tab UI
-            document.querySelectorAll('.nav-tab').forEach(tab => {
-                tab.classList.remove('text-orange-400');
-                tab.classList.add('text-gray-500');
-                
-                // Match current section to tab onclick attribute
-                const clickAttr = tab.getAttribute('onclick');
-                if (clickAttr && clickAttr.includes(sectionId)) {
-                    tab.classList.add('text-orange-400');
-                    tab.classList.remove('text-gray-500');
-                }
-            });
+        <section id="tab-teams" class="tab-content hidden space-y-6 fade-in">
+            <h2 class="text-2xl font-black uppercase tracking-tighter px-1">All Clubs</h2>
+            <div id="teams-grid" class="grid grid-cols-2 gap-4">
+                </div>
+        </section>
 
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        <section id="tab-players" class="tab-content hidden space-y-6 fade-in">
+            <h2 class="text-2xl font-black uppercase tracking-tighter px-1">Top Scorers</h2>
+            <div class="space-y-3">
+                <div class="glass p-4 rounded-2xl flex justify-between items-center border-l-4 border-yellow-500">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-xs font-black">01</span>
+                        <div class="w-8 h-8 rounded-lg bg-white/10"></div>
+                        <p class="text-[10px] font-black uppercase">Juma Hassan (BEN)</p>
+                    </div>
+                    <p class="text-[10px] font-black">14 <span class="text-gray-600">G</span></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-news" class="tab-content hidden space-y-6 fade-in">
+            <h2 class="text-2xl font-black uppercase tracking-tighter px-1">Latest News</h2>
+            <div class="glass rounded-[2rem] overflow-hidden group">
+                <div class="h-40 bg-gray-800"></div>
+                <div class="p-6">
+                    <span class="text-[8px] font-black uppercase text-teal-400 mb-2 block">Match Report</span>
+                    <h3 class="text-sm font-black uppercase mb-2">Benfica Secure Crucial Win in Amu Derby</h3>
+                    <p class="text-[10px] text-gray-500 mb-4">A last minute strike by Juma Hassan seals the three points at a packed Sports Ground.</p>
+                    <button class="text-[9px] font-black uppercase border-b border-orange-500 pb-1">Read Full Story</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-settings" class="tab-content hidden space-y-6 fade-in">
+            <h2 class="text-2xl font-black uppercase tracking-tighter px-1">My LSH</h2>
+            <div class="glass p-6 rounded-[2.5rem] bg-gradient-to-br from-blue-600/10 to-transparent border-blue-500/20">
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center p-2">
+                        <img src="https://cryptologos.cc/logos/internet-computer-icp-logo.png" class="w-full">
+                    </div>
+                    <div>
+                        <p class="text-[8px] font-black uppercase text-blue-400">Secure Access</p>
+                        <p id="auth-txt" class="text-xs font-bold">Internet Identity</p>
+                    </div>
+                </div>
+                <button onclick="mockAuth()" id="auth-btn" class="w-full py-3 bg-white text-black rounded-xl font-black uppercase text-[9px] tracking-widest">Sign In (Passwordless)</button>
+            </div>
+            
+            <div class="space-y-2">
+                <div class="glass p-4 rounded-xl flex justify-between items-center">
+                    <span class="text-[9px] font-black uppercase">Language / Lugha</span>
+                    <span class="text-[9px] font-bold text-teal-400">English</span>
+                </div>
+                <div class="glass p-4 rounded-xl flex justify-between items-center">
+                    <span class="text-[9px] font-black uppercase">Push Alerts</span>
+                    <div class="w-8 h-4 bg-teal-500 rounded-full relative"><div class="w-3 h-3 bg-white rounded-full absolute right-0.5 top-0.5"></div></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <nav class="fixed bottom-0 left-0 right-0 z-[100] glass border-t border-white/10 px-2 py-4 rounded-t-[2.5rem]">
+        <div class="flex justify-between items-center max-w-lg mx-auto">
+            <button onclick="showTab('home')" class="nav-item nav-active flex flex-col items-center space-y-1 w-1/7 text-gray-500" id="nav-home">
+                <i class="fas fa-home-alt text-lg"></i>
+                <span class="text-[7px] font-black uppercase">Home</span>
+            </button>
+            <button onclick="showTab('matches')" class="nav-item flex flex-col items-center space-y-1 w-1/7 text-gray-500" id="nav-matches">
+                <i class="fas fa-futbol text-lg"></i>
+                <span class="text-[7px] font-black uppercase">Match</span>
+            </button>
+            <button onclick="showTab('table')" class="nav-item flex flex-col items-center space-y-1 w-1/7 text-gray-500" id="nav-table">
+                <i class="fas fa-list-ol text-lg"></i>
+                <span class="text-[7px] font-black uppercase">Table</span>
+            </button>
+            <button onclick="showTab('teams')" class="nav-item flex flex-col items-center space-y-1 w-1/7 text-gray-500" id="nav-teams">
+                <i class="fas fa-shield-halved text-lg"></i>
+                <span class="text-[7px] font-black uppercase">Teams</span>
+            </button>
+            <button onclick="showTab('players')" class="nav-item flex flex-col items-center space-y-1 w-1/7 text-gray-500" id="nav-players">
+                <i class="fas fa-users text-lg"></i>
+                <span class="text-[7px] font-black uppercase">Stats</span>
+            </button>
+            <button onclick="showTab('news')" class="nav-item flex flex-col items-center space-y-1 w-1/7 text-gray-500" id="nav-news">
+                <i class="fas fa-newspaper text-lg"></i>
+                <span class="text-[7px] font-black uppercase">News</span>
+            </button>
+            <button onclick="showTab('settings')" class="nav-item flex flex-col items-center space-y-1 w-1/7 text-gray-500" id="nav-settings">
+                <i class="fas fa-cog text-lg"></i>
+                <span class="text-[7px] font-black uppercase">Menu</span>
+            </button>
+        </div>
+    </nav>
+
+    <script>
+        // 1. STATE & DATA
+        const teams = [
+            { name: "All Brothers", gd: 12, pts: 34, form: ['W', 'W', 'D', 'L', 'W'] },
+            { name: "Amu Stars", gd: 5, pts: 29, form: ['L', 'W', 'L', 'W', 'W'] },
+            { name: "Benfica FK", gd: 14, pts: 32, form: ['W', 'W', 'W', 'D', 'L'] },
+            { name: "Boda Nation", gd: -8, pts: 15, form: ['L', 'L', 'D', 'W', 'L'] },
+            { name: "Crocodile Jnrs", gd: -2, pts: 22, form: ['D', 'L', 'W', 'W', 'L'] }
+        ];
+
+        // 2. NAVIGATION SYSTEM
+        function showTab(tabId) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+            // Remove active classes from nav
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('nav-active'));
+            
+            // Show target
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`nav-${tabId}`).classList.add('nav-active');
+            
+            // Haptic Feedback Simulation
+            if(window.navigator.vibrate) window.navigator.vibrate(5);
+            window.scrollTo(0,0);
         }
 
-        function verifyAdmin() {
-            const code = document.getElementById('adminCode').value;
-            if (code === "2540") {
-                showSection('admin-panel');
-            } else {
-                alert("Access Denied: Invalid Official Code");
-            }
+        // 3. TABLE RENDERER
+        function renderLeague() {
+            const container = document.getElementById('league-data');
+            const sorted = [...teams].sort((a,b) => b.pts - a.pts);
+            
+            container.innerHTML = sorted.map((t, i) => `
+                <tr class="hover:bg-white/[0.02]">
+                    <td class="p-4 text-center ${i < 3 ? 'text-teal-400' : ''}">${i + 1}</td>
+                    <td class="p-4 uppercase tracking-tighter">${t.name}</td>
+                    <td class="p-4 text-center text-gray-500">18</td>
+                    <td class="p-4 text-center ${t.gd > 0 ? 'text-teal-500' : 'text-red-500'}">${t.gd > 0 ? '+' : ''}${t.gd}</td>
+                    <td class="p-4 text-center bg-white/5">${t.pts}</td>
+                    <td class="p-4">
+                        <div class="flex space-x-1 justify-center">
+                            ${t.form.map(f => `<div class="w-1.5 h-1.5 rounded-full ${f === 'W' ? 'bg-teal-500' : f === 'D' ? 'bg-gray-500' : 'bg-red-500'}"></div>`).join('')}
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
         }
 
-        // Initialize App
-        document.addEventListener('DOMContentLoaded', () => {
-            showSection('dashboard');
-        });
-    </script>
-</body>
-                            </html>
-                    
-                                                     
+        // 4. TEAMS GRID RENDERER
+        function renderTeams() {
+            const grid = document.getElementById('teams-grid');
+            grid.innerHTML = teams.map(t => `
+                <div class="glass p-5 rounded-[2rem] text-center space-y-3 relative overflow-hidden group">
+                    <div class="w-12 h-12 bg-white/5 rounded-2xl mx-auto flex items-center justify-center font-black text-gray-600">${t.name.charAt(0)}</div>
+                    <p class="text-[10px] font-black uppercase tracking-tighter">${t.name}</p>
+                    <button class="w-full py-2 bg-white/5 border border-white/10 rounded-xl text-[8px] font-black uppercase text-teal-400">Follow</button>
+                </div>
+            `).join('');
+        }
+
+        // 5. REAL-TIME COUNTDOWN
+        function runCountdown() {
+            const target = new Date("2026-05-10T16:30:00").getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const dist = target - now;
+                const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((dist % (1000 * 60)) / 1000);
+                document.getElementById('match-countdown').innerText = `${h}h ${m}m ${s}s`;
+            }, 1000);
+        }
+
+        // 6. UTILITIES (Alerts & Auth)
+        function mockAuth() {
+            const btn = document.getElementById('auth-btn');
+            btn.innerText = "AUTHENTICATING...";
+            setTimeout(() => {
+                btn.innerText = "SIGNED IN: 8x2...f9a";
+                btn.classList.add('opacity-50');
+                document.getElementById('auth-txt').innerText = "Verified Account";
+            }, 1500);
+        }
+
+        function triggerGoal() {
+            const alert = document.getElementById('goalAlert');
+            alert.classList.remove('hidden');
+            setTimeout(() => alert.classList.add('hidden'), 5000);
+    
