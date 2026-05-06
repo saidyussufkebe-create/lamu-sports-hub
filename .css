@@ -1,0 +1,28 @@
+/* Bottom Navigation Styling */
+.bottom-nav {
+    background: rgba(11, 27, 45, 0.8);
+    backdrop-filter: blur(15px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: env(safe-area-inset-bottom); /* iOS Protection */
+}
+
+.nav-tab.active {
+    color: var(--coral-orange);
+}
+
+.nav-tab.active i {
+    transform: translateY(-4px);
+    transition: transform 0.3s ease;
+}
+
+/* Horizontal Scroll for Top Nav */
+.top-nav-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* FAB - Center Action Button */
+.fab-center {
+    background: linear-gradient(135deg, var(--coral-orange), #FF8E53);
+    box-shadow: 0 4px 15px rgba(255, 107, 74, 0.4);
+    transform: translateY(-20px);
+}
